@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
 class Piece extends StatelessWidget {
-  final double pieceSize;
+  final int pieceType;
   final Color pieceColor;
 
   const Piece({
-    required this.pieceSize,
+    required this.pieceType,
     required this.pieceColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      Icons.circle,
-      color: pieceColor,
-      size: pieceSize,
-      semanticLabel: 'Text to announce in accessibility modes',
+    return Stack(
+      alignment: Alignment.center,
+      children: <Widget>[
+        Icon(
+          Icons.circle,
+          color: pieceColor,
+          size: 10 + pieceType * 20.0,
+        ),
+        Text(
+          pieceType.toString(),
+          style: TextStyle(fontSize: pieceType * 5 + 10, color: Colors.white),
+        ),
+      ],
     );
   }
 }

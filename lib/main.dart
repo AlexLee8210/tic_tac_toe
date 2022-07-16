@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import './piece.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Tic Tac Foe'),
+          title: Text('Dick Dack Doe'),
         ),
         body: Container(
           height: double.infinity,
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
                   children: List.generate(
                       6,
                       (index) => Piece(
-                            pieceSize: 24 + (index / 2) * 12.0,
+                            pieceType: ((index + 1) / 2.0).round(),
                             pieceColor: Colors.red,
                           ))),
               Row(
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
                   children: List.generate(
                       6,
                       (index) => Piece(
-                            pieceSize: 24 + (index / 2) * 12.0,
+                            pieceType: ((index + 1) / 2.0).round(),
                             pieceColor: Colors.blue,
                           ))),
             ],
