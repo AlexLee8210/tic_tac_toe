@@ -1,52 +1,51 @@
 import 'package:flutter/material.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
-import './piece.dart';
-import './board.dart';
+import 'views/start_view.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
+    // return isFinished
+    //     ? const GameEndPage()
+    //     : GamePage(
+    //         gameBoard: gameBoard,
+    //         p1Pieces: p1Pieces,
+    //         p2Pieces: p2Pieces,
+    //         gbPieces: gbPieces,
+    //         p1Turn: p1Turn);
+
+    // return AnimatedSplashScreen(
+    //   splash: const Splash(),
+    //   nextScreen: const StartPage(),
+    //   splashTransition: SplashTransition.rotationTransition,
+    // );
+
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Dick Dack Doe'),
+      theme: ThemeData(
+        textTheme: GoogleFonts.robotoTextTheme(
+          Theme.of(context).textTheme,
         ),
-        body: Container(
-          height: double.infinity,
-          margin: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                  6,
-                  (index) => Piece(
-                    pieceType: ((index + 1) / 2.0).round(),
-                    pieceColor: Colors.red,
-                  ),
-                ),
-              ),
-              Board(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: List.generate(
-                  6,
-                  (index) => Piece(
-                    pieceType: ((index + 1) / 2.0).round(),
-                    pieceColor: Colors.blue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+      ),
+      home: AnimatedSplashScreen(
+        duration: 1000,
+        splash: Icons.abc,
+        nextScreen: const StartPage(),
+        splashTransition: SplashTransition.fadeTransition,
+        pageTransitionType: PageTransitionType.fade,
       ),
     );
   }
