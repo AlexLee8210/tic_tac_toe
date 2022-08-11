@@ -47,6 +47,15 @@ class Board {
 
   //-1 = no winner yet, 0 = draw, 1 = p1 won, 2 = p2 won
   int checkWinner(int spot) {
+    int diag = -1;
+    if (spot % 2 == 0) {
+      diag = _diagonalCheck(spot);
+    }
+    var maxCheck = -1;
+    maxCheck = max(diag, max(_horizontalCheck(spot), _verticalCheck(spot)));
+
+    if(maxCheck > 0) return maxCheck;
+
     bool draw = true;
     //Check for draw
 
@@ -78,12 +87,8 @@ class Board {
     }
 
     if (draw) return 0;
-
-    int diag = -1;
-    if (spot % 2 == 0) {
-      diag = _diagonalCheck(spot);
-    }
-    return max(diag, max(_horizontalCheck(spot), _verticalCheck(spot)));
+    return -1;
+    
   }
 
   int _horizontalCheck(int spot) {
